@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#081919">
+<title>Пепел Небес — энциклопедия Demon: The Fallen</title>
+<meta name="description" content="Русская энциклопедия по Demon: The Fallen: история падших ангелов, семь Домов, пять фракций, двадцать три Знания, правила, бестиарий и библиотека книг.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/css/app.css?v=1.2.0">
+</head>
+<body>
+<a class="skip-link" href="#view">К содержимому</a>
+<noscript>
+  <div style="max-width:640px;margin:12vh auto;padding:32px;border:1px solid #4d524b;background:#0e2523;color:#d8d4c9;font-family:Georgia,serif">
+    <h1 style="font-weight:500;margin:0 0 12px">Пепел Небес</h1>
+    <p style="line-height:1.7;margin:0">Для работы энциклопедии нужен JavaScript: на нём построены навигация, поиск и конструктор персонажа. Включите его и обновите страницу.</p>
+  </div>
+</noscript>
+<div class="bg" aria-hidden="true">
+  <div class="bg__glow bg__glow--moss"></div>
+  <div class="bg__glow bg__glow--ember"></div>
+  <div class="bg__grain"></div>
+  <div class="bg__vignette"></div>
+</div>
+<div class="progress" id="progress" aria-hidden="true"><i></i></div>
+
+<header class="topbar">
+  <button class="icon-btn only-mobile" data-action="menu" aria-label="Открыть меню" aria-expanded="false" aria-controls="sidebar">
+    <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+
+  <a class="brand" href="#/" aria-label="Пепел Небес — на главную">
+    <span class="brand__seal" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <circle cx="20" cy="20" r="18.2" fill="none" stroke="currentColor" stroke-width=".8"/>
+        <circle cx="20" cy="20" r="14.2" fill="none" stroke="currentColor" stroke-width=".5" stroke-dasharray="1 2.4"/>
+        <path d="M20 5.5 22.3 16 32 10.9 26.4 20 36.4 22.3 26.4 24.6 32 33.7 22.3 28.6 20 39.1 17.7 28.6 8 33.7 13.6 24.6 3.6 22.3 13.6 20 8 10.9 17.7 16Z" fill="none" stroke="currentColor" stroke-width=".7"/>
+        <circle cx="20" cy="20" r="2" fill="currentColor"/>
+      </svg>
+    </span>
+    <span class="brand__text">
+      <strong>Пепел Небес</strong>
+      <em>Demon: The Fallen</em>
+    </span>
+  </a>
+
+  <button class="search-trigger" data-action="search" aria-label="Открыть поиск по энциклопедии">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+    <span>Найти Дом, Знание, правило…</span>
+    <kbd>Ctrl K</kbd>
+  </button>
+
+  <div class="topbar__actions">
+    <a class="icon-btn only-desktop" href="../world-of-darkness/index.html" title="Все миры Тьмы" aria-label="Все миры Тьмы">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>
+    </a>
+    <button class="icon-btn" data-action="dice" title="Броски d10" aria-label="Броски d10">
+      <svg viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7z"/><path d="M12 7v10M7.5 9.5l9 5M16.5 9.5l-9 5"/></svg>
+    </button>
+    <button class="icon-btn only-desktop" data-action="print" title="Печать страницы" aria-label="Печать">
+      <svg viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="sidebar" id="sidebar">
+    <nav class="nav" id="nav" aria-label="Разделы энциклопедии"></nav>
+    <div class="sidebar__foot">
+      <p class="sidebar__note">Неофициальный фанатский справочник. Demon: The Fallen © White Wolf / Paradox Interactive.</p>
+      <p class="sidebar__meta"><span class="dot"></span> офлайн-сборка · <a href="#/about">о проекте</a> · <a href="../world-of-darkness/index.html">все миры</a></p>
+    </div>
+  </aside>
+  <div class="scrim" data-action="close-menu" aria-hidden="true"></div>
+
+  <main class="main" id="view" tabindex="-1">
+    <div class="loading"><span class="seal-loader"></span><span>Открываем книгу…</span></div>
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer__in">
+    <div class="footer__brand">
+      <strong>Пепел Небес</strong>
+      <span>энциклопедия падших</span>
+    </div>
+    <p>Люцифер поднял знамя — и треть Небес пала вместе с ним. Здесь собрано всё, что нужно знать, чтобы играть в <em>Demon: The Fallen</em>: история, Дома, фракции, Знания, правила и твари, что ждут в темноте.</p>
+    <div class="footer__links">
+      <a href="#/start">Начать</a>
+      <a href="#/rules">Правила</a>
+      <a href="#/library">Библиотека</a>
+      <a href="#/about">О проекте</a>
+    </div>
+  </div>
+</footer>
+
+<div class="search" id="search" hidden>
+  <div class="search__box" role="dialog" aria-modal="true" aria-label="Поиск по энциклопедии">
+    <div class="search__field">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <input id="search-input" type="search" autocomplete="off" spellcheck="false" placeholder="Дом, Знание, правило, книга…">
+      <kbd>Esc</kbd>
+    </div>
+    <div class="search__hint" id="search-hint">Начните печатать. <span>↑ ↓</span> — выбор, <span>Enter</span> — открыть.</div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal__close icon-btn" data-action="close-modal" aria-label="Закрыть">
+      <svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></svg>
+    </button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="content/start.js"></script>
+<script src="content/history.js"></script>
+<script src="content/cosmology.js"></script>
+<script src="content/houses.js"></script>
+<script src="content/factions.js"></script>
+<script src="content/lores-a.js"></script>
+<script src="content/lores-b.js"></script>
+<script src="content/rules.js"></script>
+<script src="content/character.js"></script>
+<script src="content/bestiary-a.js"></script>
+<script src="content/bestiary-b.js"></script>
+<script src="content/world.js"></script>
+<script src="content/library.js"></script>
+<script src="assets/js/tools.js?v=1.2.0"></script>
+<script src="assets/js/sheet.js?v=1.2.0"></script>
+<script src="assets/js/app.js?v=1.2.0"></script>
+</body>
+</html>
